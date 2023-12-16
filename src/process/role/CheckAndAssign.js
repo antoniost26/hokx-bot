@@ -4,6 +4,7 @@ const { Client } = require("discord.js");
 const assignRole = require("../../utils/addRole.js");
 const removeRole = require("../../utils/removeRole.js");
 const announcement = require("../../utils/announcement.js");
+const log = require("../../utils/log.js");
 
 /**
  *
@@ -38,7 +39,8 @@ module.exports = async (client, processingData) => {
         await assignRole(
           guild,
           member.first(),
-          rankIds[processingData["roleName"]]
+          rankIds[processingData["roleName"]],
+          processingData["accountName"]
         );
         await announcement(guild, {
           daysInClan: processingData["daysInClan"],
@@ -55,5 +57,5 @@ module.exports = async (client, processingData) => {
         await assignRole(guild, member.first(), rankIds["Private"]);
       }
     })
-    .catch(console.log);
+    .catch((error) => log(guild, "error", null, null, error));
 };

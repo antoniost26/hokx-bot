@@ -1,6 +1,5 @@
 require("dotenv").config();
 const { ranks } = require("../../config.json");
-const cleanUpRoles = require("../utils/cleanUpRoles.js");
 const assignRole = require("./role/CheckAndAssign.js");
 
 module.exports = async (client) => {
