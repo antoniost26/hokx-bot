@@ -1,9 +1,9 @@
 const processPrivate = require("../../process/processPrivate");
 require("dotenv").config();
-var interval = 60000;
+var interval = 1000 * 60 * 60 * 24;
 
 module.exports = (client) => {
-  // setInterval(async () => {
-  //   await processPrivate(client);
-  // }, interval);
+  setInterval(async () => {
+    await processPrivate(client);
+  }, interval);
 };

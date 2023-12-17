@@ -16,10 +16,12 @@ let roles;
  */
 module.exports = async (client, message = null) => {
   if (message != null) {
-    message.reply("Processing request...");
-    message.channel.send(
-      `Logs for these actions can be found in <#${process.env.LOGGING_CHANNEL_ID}>`
-    );
+    message.reply("Processing request...").catch((error) => console.log(error));
+    message.channel
+      .send(
+        `Logs for these actions can be found in <#${process.env.LOGGING_CHANNEL_ID}>`
+      )
+      .catch((error) => console.log(error));
   }
 
   let returnMessage = "";
