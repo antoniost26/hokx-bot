@@ -8,7 +8,9 @@ const processPrivate = require("../../process/processPrivate");
  * @param {Message} message
  */
 module.exports = async (client, message) => {
-  if (message.author.id != "535898109184573451") return;
+  if (!["346361502196039681", "535898109184573451"].includes(message.author.id))
+    return;
   if (!message.content.startsWith("h-private")) return;
-  await processPrivate(client);
+  let replyMessage = await processPrivate(client, message);
+  message.reply(replyMessage);
 };

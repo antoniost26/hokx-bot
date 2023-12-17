@@ -1,5 +1,5 @@
 const { Client, Message } = require("discord.js");
-const cleanUpRoles = require("../../utils/cleanUpRoles");
+const cleanUpRoles = require("../../process/cleanUpRoles");
 require("dotenv").config();
 
 /**
@@ -8,18 +8,9 @@ require("dotenv").config();
  * @param {Message} message
  */
 module.exports = async (client, message) => {
-  if (message.author.id != "535898109184573451") return;
+  if (!["346361502196039681", "535898109184573451"].includes(message.author.id))
+    return;
   if (!message.content.startsWith("h-cleanup")) return;
-  fetch(process.env.API_URL)
-    .then((response) => {
-      if (response.ok) {
-        return response.json();
-      } else {
-        throw new Error("API request failed");
-      }
-    })
-    .then(async (data) => {
-      let members = data.data[process.env.CLAN_ID].members;
-      await cleanUpRoles(client, members);
-    });
+  let replyMessage = await cleanUpRoles(client, message);
+  message.reply(replyMessage);
 };
